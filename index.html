@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Vulnerable Login</title>
+</head>
+<body>
+  <h1>Login</h1>
+  <form id="loginForm">
+    <label for="username">Username:</label>
+    <input type="text" id="username" name="username"><br>
+<br>
+    <label for="password">Password:</label>
+    <input type="password" id="password" name="password">
+<br><br>
+    <button type="button" onclick="login()">Login</button
+>
+  </form>
+
+  <script>
+    function login() {
+      const username = document.getElementById('usernam
+e').value;
+      const password = document.getElementById('passwor
+d').value;
+      localStorage.setItem('username', username);
+      localStorage.setItem('password', password);
+
+      if (username === 'admin' && password === 'admin12
+3') {
+        alert('Login successful!');
+      } else {
+        alert('Invalid credentials!');
+      }
+      document.body.innerHTML += `<p>Welcome, ${usernam
+e}!</p>`;
+    }
+  </script>
+</body>
+</html>
