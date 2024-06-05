@@ -18,22 +18,28 @@
   </form>
 
   <script>
-    function login() {
-      const username = document.getElementById('usernam
-e').value;
-      const password = document.getElementById('passwor
-d').value;
-     
+        document.getElementById('loginForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            const username = DOMPurify.sanitize(document.getElementById('username').value);
+            const password = document.getElementById('password').value;
 
-      if (username === 'admin' && password === 'admin12
-3') {
-        alert('Login successful!');
-      } else {
-        alert('Invalid credentials!');
-      }
-      document.body.innerHTML += `<p>Welcome, ${usernam
-e}!</p>`;
-    }
-  </script>
+            fetch('/login', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ username, password })
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    alert('Login successful!');
+                    document.body.innerHTML += `<p>Welcome, ${username}!</p>`;
+                } else {
+                    alert('Invalid credentials!');
+                }
+            });
+        });
+    </script>
 </body>
 </html>
