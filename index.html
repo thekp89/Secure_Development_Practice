@@ -1,28 +1,26 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Vulnerable Login</title>
+    <meta charset="UTF-8">
+    <title>Secure Login</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/dompurify/2.3.3/purify.min.js"></script>
 </head>
 <body>
-  <h1>Login</h1>
-  <form id="loginForm">
-    <label for="username">Username:</label>
-    <input type="text" id="username" name="username"><br>
-<br>
-    <label for="password">Password:</label>
-    <input type="password" id="password" name="password">
-<br><br>
-    <button type="button" onclick="login()">Login</button
->
-  </form>
-
-  <script>
+    <h1>Login</h1>
+    <form id="loginForm" method="POST" action="/login">
+        <label for="username">Username:</label>
+        <input type="text" id="username" name="username"><br><br>
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password"><br><br>
+        <button type="submit">Login</button>
+    </form>
+    <script>
         document.getElementById('loginForm').addEventListener('submit', function(event) {
             event.preventDefault();
             const username = DOMPurify.sanitize(document.getElementById('username').value);
             const password = document.getElementById('password').value;
 
+            // Example of sending the credentials securely to the server
             fetch('/login', {
                 method: 'POST',
                 headers: {
@@ -43,3 +41,4 @@
     </script>
 </body>
 </html>
+
